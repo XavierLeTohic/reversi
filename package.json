@@ -1,0 +1,24 @@
+{
+  "name": "othello",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx nuxt dev",
+    "build": "npx nuxt build",
+    "start": "npx nuxt start",
+    "lint": "npx eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lintfix": "npx eslint --fix --ext .js,.vue --ignore-path .gitignore ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-vue": "^4.7.1",
+    "nuxt": "^2.3.4"
+  }
+}
