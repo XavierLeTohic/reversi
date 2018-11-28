@@ -8,9 +8,11 @@
       <div
         v-for="(col, colIndex) in row"
         :key="colIndex"
-        class="column"
-        @mouseenter="mouseEnter(rowIndex, colIndex)"
-        @mouseleave="mouseLeave"
+        :class="{
+          column: true,
+          selectable: turn === 'b' && validMovements[rowIndex][colIndex] === true
+        }"
+        @click="onSelection(rowIndex, colIndex)"
       >
         <img
           v-if="col === 'b'"
@@ -21,7 +23,7 @@
           src="~/assets/pieceWhite.png"
         >
         <div
-          v-if="shouldHighlightPosition(rowIndex, colIndex)"
+          v-if="turn === 'b' && validMovements[rowIndex][colIndex] === true"
           class="highlight"
         />
       </div>
@@ -42,34 +44,23 @@ export default {
   },
   computed: {
     ...mapState([
+      'turn',
       'board',
       'hoveredPosition',
     ]),
     ...mapGetters([
       'shouldHighlightHoveredPosition',
+      'validMovements',
     ]),
   },
   methods: {
     ...mapMutations([
-      'setHoveredPosition',
-      'unsetHoveredPosition',
+      'applyPlayerSelection',
     ]),
-    mouseEnter(row, col) {
-      this.setHoveredPosition([row, col]);
-    },
-    mouseLeave() {
-      this.unsetHoveredPosition();
-    },
-    shouldHighlightPosition(row, col) {
-      if (!this.hoveredPosition) {
-        return false;
+    onSelection(row, col) {
+      if (this.validMovements[row][col] === true) {
+        this.applyPlayerSelection([row, col]);
       }
-
-      if (row !== this.hoveredPosition[0] || col !== this.hoveredPosition[1]) {
-        return false;
-      }
-
-      return this.shouldHighlightHoveredPosition;
     },
   },
 };
@@ -84,15 +75,21 @@ export default {
   user-select none
 
   .row
-    display: flex;
-    flex-basis: calc(100% / 8)
+    display flex
+    flex-basis calc(100% / 8)
 
     .column
+      display flex
+      align-content center
+      justify-content center
       flex-basis: calc(100% / 8)
       border 1px solid black
       border-radius: 4px;
       background-color seagreen
-      box-shadow inset 0 0 7px #013303
+      box-shadow inset 0 0 3px #013303
+
+      &.selectable
+        cursor pointer
 
       img
         width 100%

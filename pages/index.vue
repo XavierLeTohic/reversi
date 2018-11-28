@@ -40,10 +40,23 @@ export default {
     flex 2
     width 50%
 
-@media (max-width: 768px)
-  .container .board__container
-    width 70%
 @media (max-width: 570px)
   .container .board__container
-    width 90%
+    width 99%
+
+@media (min-width: 570px) and (max-width: 750px)
+  .container .board__container
+    width 60%
+
+@media (min-width: 750px) and (max-width: 920px)
+  .container .board__container
+    width 50%
+
+@media (min-width: 920px) and (max-width: 1100px)
+  .container .board__container
+    width 40%
+
+@media (min-width: 1100px)
+  .container .board__container
+    width 30%
 </style>
