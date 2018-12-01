@@ -20,6 +20,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     "no-console": "off",
+    "object-curly-newline": "off",
     "import/no-unresolved": [
       "error",
       {

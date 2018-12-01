@@ -3,10 +3,10 @@
     <div class="container__top">
       <div class="player opponent">
         <BoardPlayer
-          :score="whiteTokens"
           :top="true"
           :level="2"
-          color="white"
+          :score="opponentScore"
+          :color="color === 'w' ? 'black' : 'white'"
           name="Matthias"
           emoji="🦁"
         />
@@ -18,14 +18,17 @@
     <div class="container__bottom">
       <div class="player">
         <BoardPlayer
-          :score="whiteTokens"
           :level="3"
-          color="black"
+          :score="playerScore"
+          :color="color === 'w' ? 'white' : 'black'"
           name="Xavier"
           emoji="🐶"
         />
       </div>
     </div>
+    <transition :name="bannerTransition">
+      <TurnBanner v-if="showNextTurnBanner" />
+    </transition>
   </div>
 </template>
 
@@ -35,28 +38,47 @@ import { mapState, mapGetters } from 'vuex';
 
 import Board from '../components/Board.vue';
 import BoardPlayer from '../components/BoardPlayer.vue';
+import TurnBanner from '../components/TurnBanner.vue';
 
 export default {
   name: 'Game',
   components: {
     Board,
     BoardPlayer,
+    TurnBanner,
   },
   computed: {
     ...mapState([
       'board',
+      'player',
+      'color',
+      'showNextTurnBanner',
     ]),
     ...mapGetters([
       'whiteTokens',
       'blackTokens',
     ]),
+    bannerTransition() {
+      return this.player === this.color ? 'banner-player' : 'banner';
+    },
+    opponentScore() {
+      if (this.color === 'b') {
+        return this.whiteTokens;
+      }
+      return this.blackTokens;
+    },
+    playerScore() {
+      if (this.color === 'b') {
+        return this.blackTokens;
+      }
+      return this.whiteTokens;
+    },
   },
 };
 </script>
 
 <style lang="stylus" scoped>
 .container
-  position relative
   display flex
   flex-direction column
   align-items center
@@ -69,6 +91,7 @@ export default {
     flex 1
     z-index 1
     display flex
+    max-width 420px
 
   .container__board
     flex 2
@@ -92,6 +115,21 @@ export default {
   &.opponent
     align-self flex-end
     display flex
+
+.banner-enter-active, .banner-leave-active,
+.banner-player-enter-active, .banner-player-leave-active, {
+  transition: transform 300ms, opacity 300ms;
+}
+
+.banner-enter, .banner-leave-to {
+  transform: translateY(-100%)
+  opacity 0;
+}
+
+.banner-player-enter, .banner-player-leave-to {
+  transform: translateY(100%)
+  opacity 0;
+}
 
 @media (max-width: 375px) and (min-height: 630px)
   .container > div

@@ -14,14 +14,16 @@
         }"
         @click="onSelection(rowIndex, colIndex)"
       >
-        <div
-          v-if="col === 'b'"
-          class="token token__black"
-        />
-        <div
-          v-if="col === 'w'"
-          class="token token__white"
-        />
+        <transition name="fade">
+          <div
+            v-if="col === 'b'"
+            class="token token__black"
+          />
+          <div
+            v-if="col === 'w'"
+            class="token token__white"
+          />
+        </transition>
         <div
           v-if="validMovements[rowIndex][colIndex] === true"
           :class="{ highlight: true, [player]: true }"
@@ -33,7 +35,7 @@
 
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { mapState, mapMutations, mapGetters } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'Board',
@@ -54,7 +56,7 @@ export default {
     ]),
   },
   methods: {
-    ...mapMutations([
+    ...mapActions([
       'applyPlayerSelection',
     ]),
     onSelection(row, col) {
@@ -146,6 +148,13 @@ export default {
 
   &.token__white
     background-color #fdfdfd
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 
 @media (max-width: 375px)
   .box

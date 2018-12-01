@@ -46,11 +46,13 @@ export default {
 <style lang="stylus" scoped>
 .player__container
   display flex
-  margin 10px 0
+  margin-top 20px
   width 100%
-  padding 10px 15px 0 15px
+  align-items: flex-start;
 
   &.top
+    margin-top 0
+    margin-bottom 20px
     flex-direction row-reverse
 
     .avatar
@@ -71,8 +73,6 @@ export default {
     justify-content center
     align-items center
     position relative
-    height 70px
-    width 70px
     border-radius 50%
     text-align center
     font-size 40px
@@ -97,11 +97,17 @@ export default {
     text-align left
     margin-left 5px
     margin-top 12px
+    font-weight bold
+    text-transform uppercase
+    font-size 13px
 
 .tokens
   display flex
   width 100%
   padding-top 12px
+  font-weight bold
+  text-transform uppercase
+  font-size 18px
 
   .token
     display inline-block
@@ -109,8 +115,6 @@ export default {
     width 21px
     border-radius 50%
     margin-right 5px
-    font-size 13px
-    font-weight 300
 
     &.black
       background-color #353535
