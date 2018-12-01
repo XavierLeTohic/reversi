@@ -13,7 +13,7 @@ export const state = () => ({
   color: ['b', 'w'][Math.round(Math.random())],
   player: 'b',
   freeze: false,
-  showNextTurnBanner: false,
+  showNextTurnBanner: true,
   board: Array.from({ length: 8 }, (a, row) => Array.from({ length: 8 }, (b, col) => {
     if (row === 3) {
       if (col === 3) {
@@ -84,14 +84,23 @@ export const actions = {
   applyPlayerSelection: async ({ commit, dispatch, state: { player, freeze } }, position) => {
     // Put the token on the board only if the game was not frozen
     if (!freeze) {
+      // Put the token at the position choosed by the user
       commit('setTokenToPosition', position);
+      // Freeze the game to prevent user to put new token on the board
       commit('freeze');
+      // Wait for tokens to be check and flipped if needed
       await dispatch('updateTokensColor', position);
+      // Update the current user for the next turn
       commit('setCurrentPlayer', player === 'b' ? 'w' : 'b');
+      // Allow the next turn banner to be displayed
       commit('showNextTurnBanner');
+      // Wait for the enter animation of the banner to end
       const nextTurnBannerEnterAnimation = setTimeout(() => {
+        // Hide the banner
         commit('hideNextTurnBanner');
+        // Unfreeze the game
         commit('unFreeze');
+        // Clear the current
         clearTimeout(nextTurnBannerEnterAnimation);
       }, 1000);
     }
@@ -168,7 +177,5 @@ export const mutations = {
   // Show the next turn banner,
   showNextTurnBanner: state => state.showNextTurnBanner = true,
   // Hide the next turn banner
-  hideNextTurnBanner: (state) => {
-    state.showNextTurnBanner = false;
-  },
+  hideNextTurnBanner: state => state.showNextTurnBanner = false,
 };

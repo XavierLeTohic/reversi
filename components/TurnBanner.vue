@@ -30,9 +30,10 @@ export default {
   top 0
 
   .banner
-    height 40px
+    height 12vh
+    min-height 50px
     width 100%
-    line-height 40px
+    line-height 12vh
     text-align center
     font-weight bold
     text-transform uppercase

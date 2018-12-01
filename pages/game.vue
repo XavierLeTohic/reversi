@@ -74,6 +74,13 @@ export default {
       return this.whiteTokens;
     },
   },
+  mounted() {
+    // The first turn the banner was shown, let's close it after 1s of delay
+    const hideFirstTurnBanner = setTimeout(() => {
+      this.$store.commit('hideNextTurnBanner');
+      clearTimeout(hideFirstTurnBanner);
+    }, 1000);
+  },
 };
 </script>
 
