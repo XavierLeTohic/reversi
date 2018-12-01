@@ -1,8 +1,8 @@
 <template>
-  <div :class="{ banner__container: true, [player === color ? 'player' : 'opponent']: true }">
-    <div :class="{ banner: true, [player]: true }">
-      <span v-if="player === color">Your turn</span>
-      <span v-if="player !== color">Your opponent's turn</span>
+  <div :class="{ banner__container: true, [currentPlayer === color ? 'player' : 'opponent']: true }">
+    <div :class="{ banner: true, [currentPlayer]: true }">
+      <span v-if="currentPlayer === color">Your turn</span>
+      <span v-if="currentPlayer !== color">Your opponent's turn</span>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   name: 'TurnBanner',
   computed: {
     ...mapState([
-      'player',
+      'currentPlayer',
       'color',
     ]),
   },

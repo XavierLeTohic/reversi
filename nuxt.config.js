@@ -7,6 +7,9 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     ],
   },
+  css: [
+    '~/assets/main.styl',
+  ],
   build: {
     extend(config, ctx) {
       // Run ESLint on save

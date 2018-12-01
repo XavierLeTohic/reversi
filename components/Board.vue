@@ -1,5 +1,5 @@
 <template>
-  <div class="board">
+  <div :class="{ board: true, readonly }">
     <div
       v-for="(row, rowIndex) in board"
       :key="rowIndex"
@@ -10,7 +10,7 @@
         :key="colIndex"
         :class="{
           box: true,
-          selectable: player === 'b' && validMovements[rowIndex][colIndex] === true
+          selectable: currentPlayer === 'b' && validMovements[rowIndex][colIndex] === true
         }"
         @click="onSelection(rowIndex, colIndex)"
       >
@@ -23,11 +23,11 @@
             v-if="col === 'w'"
             class="token token__white"
           />
+          <div
+            v-if="!readonly && validMovements[rowIndex][colIndex] === true"
+            :class="{ highlight: true, [currentPlayer]: true }"
+          />
         </transition>
-        <div
-          v-if="validMovements[rowIndex][colIndex] === true"
-          :class="{ highlight: true, [player]: true }"
-        />
       </div>
     </div>
   </div>
@@ -39,6 +39,12 @@ import { mapState, mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'Board',
+  props: {
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       highlighted: null,
@@ -46,7 +52,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'player',
+      'currentPlayer',
       'board',
       'hoveredPosition',
     ]),
@@ -60,7 +66,7 @@ export default {
       'applyPlayerSelection',
     ]),
     onSelection(row, col) {
-      if (this.validMovements[row][col] === true) {
+      if (!this.readonly && this.validMovements[row][col] === true) {
         this.applyPlayerSelection([row, col]);
       }
     },
@@ -137,11 +143,13 @@ export default {
     &.w
       background-color rgba(255, 255, 255, 0.3)
 
+/* Token style */
 .token
   height 70%
   width 70%
   border-radius 50%
   align-self center
+  box-shadow 0px 2px 2px rgba(0, 0, 0, 0.4)
 
   &.token__black
     background-color #000000
@@ -149,12 +157,24 @@ export default {
   &.token__white
     background-color #ffffff
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
+/* Token transition */
+.fade-enter-active, .fade-leave-active
+  transition opacity .5s
+
+.fade-enter, .fade-leave-to
+  opacity 0
+
+
+/* Read only board style */
+.board.readonly
+
+  .box
+    height 18px
+    width 18px
+
+  .token
+    height 10px
+    width 10px
 
 @media (max-width: 375px)
   .box

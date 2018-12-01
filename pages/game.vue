@@ -1,5 +1,7 @@
 <template>
-  <div class="container">
+  <div
+    class="container"
+  >
     <div class="container__top">
       <div class="player opponent">
         <BoardPlayer
@@ -49,8 +51,9 @@ export default {
   },
   computed: {
     ...mapState([
+      'end',
       'board',
-      'player',
+      'currentPlayer',
       'color',
       'showNextTurnBanner',
     ]),
@@ -59,7 +62,7 @@ export default {
       'blackTokens',
     ]),
     bannerTransition() {
-      return this.player === this.color ? 'banner-player' : 'banner';
+      return this.currentPlayer === this.color ? 'banner-player' : 'banner';
     },
     opponentScore() {
       if (this.color === 'b') {
@@ -74,11 +77,19 @@ export default {
       return this.whiteTokens;
     },
   },
+  watch: {
+    end(value) {
+      if (value) {
+        this.$router.push('/results');
+      }
+    },
+  },
   mounted() {
     // The first turn the banner was shown, let's close it after 1s of delay
     const hideFirstTurnBanner = setTimeout(() => {
       this.$store.commit('hideNextTurnBanner');
       clearTimeout(hideFirstTurnBanner);
+      // this.$store.commit('endTheGame');
     }, 1000);
   },
 };
@@ -92,7 +103,6 @@ export default {
   justify-content space-between
   height 100%
   color white
-  background-image radial-gradient(circle, #59c76d, #4eb163, #3e8c51, #2c5437, #000000)
 
   > div
     flex 1
@@ -112,11 +122,10 @@ export default {
     padding 0 20px
 
 .player
-  display flex
   width 100%
-  justify-content flex-start
 
   &.opponent
+    display flex
     justify-content: flex-end;
 
   &.opponent
@@ -136,6 +145,13 @@ export default {
 .banner-player-enter, .banner-player-leave-to {
   transform: translateY(100%)
   opacity 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 350ms;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 
 @media (max-width: 375px) and (min-height: 630px)

@@ -21,6 +21,7 @@ module.exports = {
   rules: {
     "no-console": "off",
     "object-curly-newline": "off",
+    "vue/max-attributes-per-line": "off",
     "import/no-unresolved": [
       "error",
       {

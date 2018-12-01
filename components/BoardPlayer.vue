@@ -1,10 +1,9 @@
 <template>
   <div :class="{ player__container: true, top }">
-    <div class="avatar">
+    <div class="player__description">
       <div class="emoji">{{ emoji }}</div>
-      <div class="level">{{ level }}</div>
+      <div class="name">{{ name }}</div>
     </div>
-    <div class="name">{{ name }}</div>
     <div class="tokens">
       <span :class="{ token: true, [color]: true }" /> x {{ score }}
     </div>
@@ -46,83 +45,54 @@ export default {
 <style lang="stylus" scoped>
 .player__container
   display flex
-  margin-top 20px
+  justify-content space-between
+  align-content flex-start
   width 100%
-  align-items: flex-start;
+  margin-top 15px
+  text-transform uppercase
+  font-weight bold
+  text-shadow 0px 2px 2px rgba(0, 0, 0, 0.4)
 
+  /* Player on the top of the screen */
   &.top
-    margin-top 0
-    margin-bottom 20px
+    align-content center
     flex-direction row-reverse
+    margin-top 0
+    margin-bottom 15px
 
-    .avatar
+    .player__description
       flex-direction row-reverse
 
-    .emoji
-      margin-left 5px
-      margin-right 0
+      .name
+        margin-right 10px
 
-    .name
-      text-align right
-      margin-left 20px
-      margin-right 5px
-
-  .avatar
-    display flex
-    flex-direction row
-    justify-content center
-    align-items center
-    position relative
-    border-radius 50%
-    text-align center
-    font-size 40px
-
-    .emoji
-      margin-right 5px
-
-    .level
-      align-self flex-start
-      position relative
-      height 17px
-      width 17px
-      line-height 17px
-      border-radius 50%
-      font-weight 100
-      font-size 10px
-      text-align center
-      background-color rgb(47, 147, 231)
-      margin-top 12px
+.player__description
+  display flex
 
   .name
-    text-align left
-    margin-left 5px
-    margin-top 12px
-    font-weight bold
-    text-transform uppercase
+    margin-left 10px
     font-size 13px
 
+  .emoji
+    font-size 34px
+
+.player__description .emoji,
+.player__description .name,
 .tokens
   display flex
-  width 100%
-  padding-top 12px
-  font-weight bold
-  text-transform uppercase
-  font-size 18px
+  align-items center
 
-  .token
-    display inline-block
-    height 21px
-    width 21px
-    border-radius 50%
-    margin-right 5px
+.token
+  display inline-block
+  height 23px
+  width 23px
+  border-radius 50%
+  margin 0 5px
+  box-shadow 0px 2px 2px rgba(0, 0, 0, 0.4)
 
-    &.black
-      background-color #000000
+  &.black
+    background-color #000000
 
-    &.white
-      background-color #ffffff
-
-.player__container:not(.top)
-  .tokens
-    justify-content flex-end
+  &.white
+    background-color #ffffff
 </style>
