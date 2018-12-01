@@ -1,7 +1,7 @@
 export default {
   mode: 'spa',
   head: {
-    titleTemplate: '%s - Nuxt.js',
+    titleTemplate: 'Play now | ReversiMoji',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
