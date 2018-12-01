@@ -9,8 +9,8 @@
         v-for="(col, colIndex) in row"
         :key="colIndex"
         :class="{
-          column: true,
-          selectable: turn === 'b' && validMovements[rowIndex][colIndex] === true
+          box: true,
+          selectable: player === 'b' && validMovements[rowIndex][colIndex] === true
         }"
         @click="onSelection(rowIndex, colIndex)"
       >
@@ -23,8 +23,8 @@
           src="~/assets/pieceWhite.png"
         >
         <div
-          v-if="turn === 'b' && validMovements[rowIndex][colIndex] === true"
-          class="highlight"
+          v-if="validMovements[rowIndex][colIndex] === true"
+          :class="{ highlight: true, [player]: true }"
         />
       </div>
     </div>
@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'turn',
+      'player',
       'board',
       'hoveredPosition',
     ]),
@@ -67,36 +67,84 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+/* eslint-disable */
 .board
   display flex
   flex-direction column
   flex-wrap wrap
-  height 100%
+  align-content center
+  justify-content center
   user-select none
+  background-image radial-gradient(circle, #25bc41, #20a83b, #1c9435, #19812f, #166e29)
+  box-shadow inset 0px 0px 16px -2px #000000
+  border 7px solid rgb(141, 81, 49)
+  border-radius 4px
 
-  .row
-    display flex
-    flex-basis calc(100% / 8)
+.row
+  display flex
+  max-width 368px
 
-    .column
-      display flex
-      align-content center
-      justify-content center
-      flex-basis: calc(100% / 8)
-      border 1px solid black
-      border-radius: 4px;
-      background-color seagreen
-      box-shadow inset 0 0 3px #013303
+  .box
+    &:first-child
+      border-left none
+      border-image-width 1px 1px 1px 0
 
-      &.selectable
-        cursor pointer
+    &:last-child
+      border-right none
+      border-image-width 1px 0 1px 1px
 
-      img
-        width 100%
-        height auto
+  &:first-child .box
+    border-top none
+    border-image-width 0 1px 1px 1px
 
-      .highlight
-        height 100%
-        width 100%
-        background-color rgba(255, 132, 0, 0.60)
+    &:first-child
+      border-image-width 0 1px 1px 0
+
+    &:last-child
+      border-image-width 0 0 1px 1px
+
+  &:last-child .box
+    border-bottom none
+    border-image-width 1px 1px 0 1px
+
+    &:first-child
+
+      border-image-width 1px 1px 0 0
+    &:last-child
+      border-image-width 1px 0 0 1px
+
+.box
+  display flex
+  align-content center
+  justify-content center
+  width 46px
+  height 46px
+  -webkit-tap-highlight-color transparent
+  border: 1px solid transparent;
+  border-image url('~assets/textures/noise.png') 30 / 1px round
+
+  &.selectable
+    cursor pointer
+
+  img
+    height 100%
+    width auto
+
+  .highlight
+    height 90%
+    width 90%
+    border-radius 4px
+    align-self center
+    justify-self center
+
+    &.b
+      background-color rgba(10, 9, 9, 0.25)
+
+    &.w
+      background-color rgba(255, 255, 255, 0.20)
+
+@media (max-width: 375px)
+  .box
+    width 36px
+    height 36px
 </style>

@@ -8,7 +8,6 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   font-family: system-ui, sans-serif;
-  background-color: black;
 }
 
 html,
