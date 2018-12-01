@@ -1,16 +1,29 @@
 <template>
   <div class="container">
-    <div>
-      <div>
-        Blancs {{ whiteTokens }}
+    <div class="container__top">
+      <div class="player opponent">
+        <BoardPlayer
+          :score="whiteTokens"
+          :top="true"
+          :level="2"
+          color="white"
+          name="Matthias"
+          emoji="🦁"
+        />
       </div>
     </div>
-    <div class="board__container">
+    <div class="container__board">
       <Board />
     </div>
-    <div>
-      <div>
-        Noirs {{ blackTokens }}
+    <div class="container__bottom">
+      <div class="player">
+        <BoardPlayer
+          :score="whiteTokens"
+          :level="3"
+          color="black"
+          name="Xavier"
+          emoji="🐶"
+        />
       </div>
     </div>
   </div>
@@ -21,11 +34,13 @@
 import { mapState, mapGetters } from 'vuex';
 
 import Board from '../components/Board.vue';
+import BoardPlayer from '../components/BoardPlayer.vue';
 
 export default {
   name: 'Game',
   components: {
     Board,
+    BoardPlayer,
   },
   computed: {
     ...mapState([
@@ -48,15 +63,46 @@ export default {
   justify-content space-between
   height 100%
   color white
-  background-image radial-gradient(circle, #59c76d, #4eb163, #449a59, #3b854f, #337045)
+  background-image radial-gradient(circle, #59c76d, #4eb163, #3e8c51, #2c5437, #000000)
 
   > div
     flex 1
     z-index 1
-    align-items center
-    justify-content center
     display flex
 
-  .board__container
+  .container__board
     flex 2
+    align-items center
+    width 100%
+    justify-content center
+
+  .container__top,
+  .container__bottom
+    width 100%
+    padding 0 20px
+
+.player
+  display flex
+  width 100%
+  justify-content flex-start
+
+  &.opponent
+    justify-content: flex-end;
+
+  &.opponent
+    align-self flex-end
+    display flex
+
+@media (max-width: 375px) and (min-height: 630px)
+  .container > div
+    flex 1.3
+
+@media (max-width: 375px) and (min-height: 750px)
+  .container > div
+    flex 1.8
+
+@media (min-width: 375px) and (max-height: 650px)
+  .container > div
+    flex 0.8
+
 </style>
