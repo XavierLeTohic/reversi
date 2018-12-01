@@ -40,13 +40,13 @@ export default {
 
     /* White turn */
     &.w
-      background-color #fdfdfd
-      color #353535
+      background-color #ffffff
+      color #000000
 
     /* Black turn */
     &.b
-      background-color #353535
-      color #fdfdfd
+      background-color #000000
+      color #ffffff
 
   &.opponent .banner
     align-self flex-start

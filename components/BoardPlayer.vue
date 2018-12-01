@@ -117,10 +117,10 @@ export default {
     margin-right 5px
 
     &.black
-      background-color #353535
+      background-color #000000
 
     &.white
-      background-color #fdfdfd
+      background-color #ffffff
 
 .player__container:not(.top)
   .tokens

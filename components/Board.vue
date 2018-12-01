@@ -144,10 +144,10 @@ export default {
   align-self center
 
   &.token__black
-    background-color #353535
+    background-color #000000
 
   &.token__white
-    background-color #fdfdfd
+    background-color #ffffff
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
