@@ -80,7 +80,6 @@ export default {
   display flex
   flex-direction column
   flex-wrap wrap
-  align-content center
   justify-content center
   user-select none
   background-image radial-gradient(circle, #25bc41, #20a83b, #1c9435, #19812f, #166e29)
@@ -124,7 +123,7 @@ export default {
   width 46px
   height 46px
   -webkit-tap-highlight-color transparent
-  border-image url('~assets/textures/noise.png') 30 / 1px round
+  border-image url('/textures/noise.png') 30 / 1px round
   border-style solid
 
   &.selectable

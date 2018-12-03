@@ -18,7 +18,6 @@ export default class SoundManager {
     // AudioContext, we should use HTML5 Audio API
     // I had to implement AudioContext because since Chrome 66
     // Autoplay of HTML5 Audio API is not working anymore.
-    // My apologize to have not implemented the two APIs.
     if (!this.contextAudioNotSupported) {
       this.bufferListPath = ['sounds/chipLay2.ogg'];
 

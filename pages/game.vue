@@ -44,6 +44,7 @@ import TurnBanner from '../components/TurnBanner.vue';
 
 export default {
   name: 'Game',
+  transition: 'fade',
   components: {
     Board,
     BoardPlayer,
@@ -89,8 +90,7 @@ export default {
     const hideFirstTurnBanner = setTimeout(() => {
       this.$store.commit('hideNextTurnBanner');
       clearTimeout(hideFirstTurnBanner);
-      // this.$store.commit('endTheGame');
-    }, 1000);
+    }, 1500);
   },
 };
 </script>
@@ -115,6 +115,7 @@ export default {
     align-items center
     width 100%
     justify-content center
+    padding 0 20px
 
   .container__top,
   .container__bottom

@@ -1,4 +1,8 @@
 .vscode
 .nuxt
 
+sw.*
+
 node_modules
+
+dist.zip

@@ -25,7 +25,12 @@
       </div>
 
       <div class="actions">
-        <button>Play again</button>
+        <button @click="newGame">
+          <span class="button__emoji">⚔️</span> New game
+        </button>
+        <button class="button__secondary" @click="backHome">
+          <span class="button__emoji">🔙</span> Home
+        </button>
       </div>
     </div>
   </div>
@@ -73,6 +78,14 @@ export default {
       return this.opponentTokens === this.userTokens;
     },
   },
+  methods: {
+    newGame() {
+      this.$router.push('/reset');
+    },
+    backHome() {
+      this.$router.push('/');
+    },
+  },
 };
 </script>
 
@@ -107,6 +120,10 @@ export default {
     margin-top 10px
 
 .actions
+  display flex
+  flex-direction column
+  align-items center
+  justify-content center
   margin-top 30px
 
 @media (max-width: 570px)

@@ -8,33 +8,18 @@
 import Vue from 'vue';
 
 import isValidPosition from '../utils/isValidPosition';
+import NewBoard from '../utils/NewBoard';
 
-export const state = () => ({
+const initialState = () => ({
   end: false, // Is the game has ended
   freeze: false, // Is the game was frozen to avoid any changes during animations etc.
   color: ['b', 'w'][Math.round(Math.random())], // Random selection of the color
   currentPlayer: 'b', // First player is always the one with black tokens
   showNextTurnBanner: true, // Display which player will play the first turn
-  board: Array.from({ length: 8 }, (a, row) => Array.from({ length: 8 }, (b, col) => {
-    if (row === 3) {
-      if (col === 3) {
-        return 'w';
-      }
-      if (col === 4) {
-        return 'b';
-      }
-    }
-    if (row === 4) {
-      if (col === 3) {
-        return 'b';
-      }
-      if (col === 4) {
-        return 'w';
-      }
-    }
-    return null;
-  })),
+  board: NewBoard(8),
 });
+
+export const state = () => initialState();
 
 export const getters = {
   validMovements(state) {
@@ -160,7 +145,6 @@ export const actions = {
     return false;
   },
   endOfTheGame: async ({ commit }) => {
-    console.log('end of the game');
     // Freeze the game to avoid any problems
     commit('freeze');
     commit('endTheGame');
@@ -199,4 +183,8 @@ export const mutations = {
   // Hide the next turn banner
   hideNextTurnBanner: state => state.showNextTurnBanner = false,
   endTheGame: state => state.end = true,
+  resetState: (state) => {
+    const newStates = initialState();
+    Object.keys(newStates).forEach(key => state[key] = newStates[key]);
+  },
 };

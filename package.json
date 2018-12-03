@@ -1,19 +1,21 @@
 {
   "name": "othello",
   "version": "1.0.0",
+  "license": "GNU",
+  "author": "Xavier Le Tohic <xavierletohic@gmail.com>",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "npx nuxt dev",
     "build": "npx nuxt build",
     "start": "npx nuxt start",
+    "generate": "npx nuxt generate",
     "lint": "npx eslint --ext .js,.vue --ignore-path .gitignore .",
     "lintfix": "npx eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "precommit": "npm run lint",
-  "author": "Xavier Le Tohic <xavierletohic@gmail.com>",
-  "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^9.3.1",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -23,5 +25,8 @@
     "nuxt": "^2.3.4",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
+  },
+  "dependencies": {
+    "@nuxtjs/pwa": "^2.6.0"
   }
 }
