@@ -7,6 +7,8 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=0' },
       { hid: 'description', name: 'description', content: 'Play now to a new modern Reversi game !' },
+      { hid: 'apple-mobile-web-app-capable', name: 'apple-mobile-web-app-capable', content: 'yes' },
+      { hid: 'apple-mobile-web-app-status-bar-style', name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: './favicon.ico' },

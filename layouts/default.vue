@@ -10,7 +10,7 @@ html, body
   font-family system-ui, sans-serif
 
 body
-  background-image radial-gradient(circle, #59c76d, #4eb163, #3e8c51, #2c5437, #000000)
+  background-image radial-gradient(circle, #59c76d, #4eb163, #3e8c51, #192f1f, #000)
 
 html,
 body,
