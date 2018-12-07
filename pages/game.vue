@@ -165,6 +165,10 @@ export default {
   opacity: 0;
 }
 
+@media (max-width: 375px) and (max-height: 530px)
+  .container > div
+    flex 0.6
+
 @media (max-width: 375px) and (min-height: 630px)
   .container > div
     flex 1.3

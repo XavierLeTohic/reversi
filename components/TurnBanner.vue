@@ -27,17 +27,18 @@ export default {
   position absolute
   display flex
   width 100%
-  top 0
+  top 20px
 
   .banner
-    height 12vh
-    min-height 50px
-    width 100%
-    line-height 12vh
+    width auto
     text-align center
     font-weight bold
+    border-radius 20px
+    font-size 12px
     text-transform uppercase
+    padding 10px 20px
     box-shadow 0px 0px 10px -2px #000000
+    margin auto
 
     /* White turn */
     &.w
@@ -54,7 +55,7 @@ export default {
 
   &.player
     top auto
-    bottom 0
+    bottom 20px
 
     .banner
       align-self flex-end
