@@ -12,29 +12,13 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: './favicon.ico' },
       { rel: 'preload', as: 'image', href: './textures/noise.png' },
     ],
-    script: [
-      { src: 'https://connect.facebook.net/en_US/fbinstant.6.2.js' },
-    ],
   },
   css: [
     '~/assets/main.styl',
   ],
   modules: [
-    ['@nuxtjs/pwa', {
-      workbox: {
-        publicPath: './_nuxt/',
-      },
-      manifest: {
-        publicPath: './_nuxt/',
-      },
-    }],
+    '@nuxtjs/pwa',
   ],
-  plugins: [
-    { src: '~/plugins/facebook', ssr: false },
-  ],
-  router: {
-    mode: 'hash',
-  },
   workbox: {
     skipWaiting: true,
     clientsClaim: true,
@@ -66,11 +50,6 @@ export default {
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
         });
-      }
-
-      if (!isDev) {
-        // eslint-disable-next-line no-param-reassign
-        config.output.publicPath = './_nuxt/';
       }
 
       return config;

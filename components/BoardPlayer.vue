@@ -1,8 +1,12 @@
 <template>
   <div :class="{ player__container: true, top }">
-    <div class="player__description">
+    <div v-if="!isAi" class="player__description">
       <div class="emoji">{{ emoji }}</div>
       <div class="name">{{ name }}</div>
+    </div>
+    <div v-if="isAi" class="player__description">
+      <div class="emoji">🤖</div>
+      <div class="name">Robot</div>
     </div>
     <div class="tokens">
       <span :class="{ token: true, [color]: true }" /> x {{ score }}
@@ -35,6 +39,10 @@ export default {
       default: '',
     },
     top: {
+      type: Boolean,
+      default: false,
+    },
+    isAi: {
       type: Boolean,
       default: false,
     },

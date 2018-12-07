@@ -7,10 +7,14 @@
 */
 import Vue from 'vue';
 
-import isValidPosition from '../utils/isValidPosition';
 import NewBoard from '../utils/NewBoard';
+import isValidPosition from '../utils/isValidPosition';
+// import MiniMax from '../utils/MiniMax';
 
 const initialState = () => ({
+  multiplayer: false, // The game is multiplayer on the same screen
+  againstAI: true, // The game is against an AI
+  online: false, // The game is multiplayer and online
   end: false, // Is the game has ended
   freeze: false, // Is the game was frozen to avoid any changes during animations etc.
   color: ['b', 'w'][Math.round(Math.random())], // Random selection of the color
@@ -70,47 +74,78 @@ export const getters = {
 };
 
 export const actions = {
-  applyPlayerSelection: async ({ commit, dispatch, state, getters }, position) => {
+  makePlayerMove: async ({ commit, dispatch, state, getters }, [row, col]) => {
     // Put the token on the board only if the game was not frozen
     if (!state.freeze) {
       // Put the token at the position choosed by the user
-      commit('setTokenToPosition', position);
+      commit('setTokenAtPosition', { row, col, playerColor: state.color });
       // Freeze the game to prevent user to put new token on the board
       commit('freeze');
       // Wait for tokens to be check and flipped if needed
-      await dispatch('updateTokensColor', position);
+      await dispatch('updateTokensColor', { row, col, playerColor: state.color });
       // Update the current user for the next turn
       await commit('setCurrentPlayer', state.currentPlayer === 'b' ? 'w' : 'b');
 
       // Switch player and display next turn banner only if valid movements exist
       if (!getters.isBoardComplete) {
-        // Allow the next turn banner to be displayed
-        commit('showNextTurnBanner');
-        // Wait for the enter animation of the banner to end
-        const nextTurnBannerEnterAnimation = setTimeout(() => {
-          // Hide the banner
-          commit('hideNextTurnBanner');
-          // Unfreeze the game
-          commit('unFreeze');
-          // Clear the current
-          clearTimeout(nextTurnBannerEnterAnimation);
-        }, 1000);
+        dispatch('showNextTurnBanner');
+        // Is againstAI
+        if (state.againstAI && state.currentPlayer !== state.color) {
+          const delayAITurn = setTimeout(async () => {
+            // Make the AI move
+            dispatch('makeAIMove');
+            clearTimeout(delayAITurn);
+          }, 1000);
+        }
       } else {
         dispatch('endOfTheGame');
       }
     }
   },
+  // Make the AI move
+  makeAIMove: async ({ getters, commit, dispatch, state: { color, currentPlayer } }) => {
+    const validMovements = getters.validMovements.reduce((acc, row, rowIndex) => {
+      for (let col = 0; col < row.length; col += 1) {
+        // If the row and the column is a valid position
+        if (row[col]) {
+          acc.push({
+            row: rowIndex,
+            col,
+          });
+        }
+      }
+
+      return acc;
+    }, []);
+
+    // TODO use minimax algo
+    const randomMovement = Math.floor((Math.random() * (validMovements.length - 1)) + 0) || 0;
+    const { row, col } = validMovements[randomMovement];
+
+    await commit('setTokenAtPosition', { row, col, playerColor: (color === 'w' ? 'b' : 'w') });
+    // Wait for tokens to be check and flipped if needed
+    await dispatch('updateTokensColor', { row, col, playerColor: (color === 'w' ? 'b' : 'w') });
+    // Update the current user for the next turn
+    await commit('setCurrentPlayer', currentPlayer === 'b' ? 'w' : 'b');
+
+    if (getters.isBoardComplete) {
+      dispatch('endOfTheGame');
+    } else {
+      // Display next turn banner
+      dispatch('showNextTurnBanner');
+    }
+  },
   // Update the tokens color if needed
-  updateTokensColor: async ({ dispatch, state: { currentPlayer, board } }, [row, col]) => {
+  updateTokensColor: async ({ dispatch, state: { board } }, { row, col, playerColor }) => {
     const tasks = [
-      dispatch('updateTokensOnLine', [currentPlayer, -1, -1, row, col, board]),
-      dispatch('updateTokensOnLine', [currentPlayer, -1, 0, row, col, board]),
-      dispatch('updateTokensOnLine', [currentPlayer, -1, 1, row, col, board]),
-      dispatch('updateTokensOnLine', [currentPlayer, 0, -1, row, col, board]),
-      dispatch('updateTokensOnLine', [currentPlayer, 0, 1, row, col, board]),
-      dispatch('updateTokensOnLine', [currentPlayer, 1, -1, row, col, board]),
-      dispatch('updateTokensOnLine', [currentPlayer, 1, 0, row, col, board]),
-      dispatch('updateTokensOnLine', [currentPlayer, 1, 1, row, col, board]),
+      dispatch('updateTokensOnLine', [playerColor, -1, -1, row, col, board]),
+      dispatch('updateTokensOnLine', [playerColor, -1, 0, row, col, board]),
+      dispatch('updateTokensOnLine', [playerColor, -1, 1, row, col, board]),
+      dispatch('updateTokensOnLine', [playerColor, 0, -1, row, col, board]),
+      dispatch('updateTokensOnLine', [playerColor, 0, 1, row, col, board]),
+      dispatch('updateTokensOnLine', [playerColor, 1, -1, row, col, board]),
+      dispatch('updateTokensOnLine', [playerColor, 1, 0, row, col, board]),
+      dispatch('updateTokensOnLine', [playerColor, 1, 1, row, col, board]),
     ];
 
     await Promise.all(tasks);
@@ -144,6 +179,19 @@ export const actions = {
     }
     return false;
   },
+  showNextTurnBanner: ({ commit }) => {
+    // Allow the next turn banner to be displayed
+    commit('showNextTurnBanner');
+    // Wait for the enter animation of the banner to end
+    const nextTurnBannerEnterAnimation = setTimeout(async () => {
+      // Clear the current
+      clearTimeout(nextTurnBannerEnterAnimation);
+      // Hide the banner
+      commit('hideNextTurnBanner');
+      // Unfreeze the game
+      commit('unFreeze');
+    }, 1000);
+  },
   endOfTheGame: async ({ commit }) => {
     // Freeze the game to avoid any problems
     commit('freeze');
@@ -157,14 +205,14 @@ export const mutations = {
   // Unfreeze the game
   unFreeze: state => state.freeze = false,
   // Put the user token on the board. This mutation is call after a user interaction
-  setTokenToPosition: (state, [row, col]) => {
+  setTokenAtPosition: (state, { row, col, playerColor }) => {
     // Avoid to put a token on the board if the game was frozen
     if (!state.freeze) {
       // Add a token of the current player to the selected position
       Vue.set(
         state.board,
         row,
-        state.board[row].map((value, i) => (i === col ? state.currentPlayer : value)),
+        state.board[row].map((value, i) => (i === col ? playerColor : value)),
       );
     }
   },

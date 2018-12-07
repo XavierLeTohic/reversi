@@ -6,6 +6,7 @@
       <div class="player opponent">
         <BoardPlayer
           :top="true"
+          :is-ai="againstAI"
           :level="2"
           :score="opponentScore"
           :color="color === 'w' ? 'black' : 'white'"
@@ -54,8 +55,9 @@ export default {
     ...mapState([
       'end',
       'board',
-      'currentPlayer',
       'color',
+      'againstAI',
+      'currentPlayer',
       'showNextTurnBanner',
     ]),
     ...mapGetters([
@@ -90,6 +92,14 @@ export default {
     const hideFirstTurnBanner = setTimeout(() => {
       this.$store.commit('hideNextTurnBanner');
       clearTimeout(hideFirstTurnBanner);
+
+      // First turn is AI
+      if (this.againstAI && this.color !== this.currentPlayer) {
+        const makeAIMove = setTimeout(() => {
+          this.$store.dispatch('makeAIMove');
+          clearTimeout(makeAIMove);
+        }, 2000);
+      }
     }, 1500);
   },
 };

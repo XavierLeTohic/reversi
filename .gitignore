@@ -3,7 +3,10 @@
 
 sw.*
 
-node_modu
+node_modules
 
 dist
 dist.zip
+
+key.pem
+cert.pem

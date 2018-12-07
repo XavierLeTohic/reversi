@@ -6,10 +6,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nuxt dev",
-    "build": "npx nuxt build",
-    "start": "npx nuxt start",
-    "generate": "npx nuxt generate",
+    "dev": "npx nuxt dev --config-file config/socket.nuxt.config.js",
+    "dev:facebook": "npx nuxt dev --config-file config/facebook.nuxt.config.js",
+    "build": "npx nuxt build --config-file config/socket.nuxt.config.js",
+    "build:facebook": "npx nuxt build --config-file config/facebook.nuxt.config.js",
+    "start": "npx nuxt start --config-file config/socket.nuxt.config.js",
+    "start:facebook": "npx nuxt start --config-file config/facebook.nuxt.config.js",
+    "generate": "npx nuxt generate --config-file config/socket.nuxt.config.js",
+    "generate:facebook": "npx nuxt generate --config-file config/facebook.nuxt.config.js",
     "lint": "npx eslint --ext .js,.vue --ignore-path .gitignore .",
     "lintfix": "npx eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },

@@ -24,7 +24,7 @@
             class="token token__white"
           />
           <div
-            v-if="!readonly && validMovements[rowIndex][colIndex] === true"
+            v-if="shouldDisplayHighlight(rowIndex, colIndex) === true"
             :class="{ highlight: true, [currentPlayer]: true }"
           />
         </transition>
@@ -52,8 +52,12 @@ export default {
   },
   computed: {
     ...mapState([
-      'currentPlayer',
+      'againstAI',
+      'multiplayer',
+      'online',
+      'color',
       'board',
+      'currentPlayer',
       'hoveredPosition',
     ]),
     ...mapGetters([
@@ -63,12 +67,25 @@ export default {
   },
   methods: {
     ...mapActions([
-      'applyPlayerSelection',
+      'makePlayerMove',
     ]),
     onSelection(row, col) {
       if (!this.readonly && this.validMovements[row][col] === true) {
-        this.applyPlayerSelection([row, col]);
+        this.makePlayerMove([row, col]);
       }
+    },
+    shouldDisplayHighlight(row, col) {
+      // Read only or token exist at this position
+      if (this.readonly || this.board[row][col] !== null) {
+        return false;
+      }
+
+      // Opponent's turn and not on the same screen
+      if (this.currentPlayer !== this.color && ((this.multiplayer && this.online) || this.againstAI)) {
+        return false;
+      }
+
+      return this.validMovements[row][col];
     },
   },
 };
