@@ -12,10 +12,10 @@ import isValidPosition from '../utils/isValidPosition';
 // import MiniMax from '../utils/MiniMax';
 
 const initialState = () => ({
-  userName: '',
-  userEmoji: '🦊', // Default user emoji
+  userName: 'Player 1',
+  userEmoji: '', // Default user emoji
   multiplayer: false, // The game is multiplayer on the same screen
-  againstAI: true, // The game is against an AI
+  againstAI: false, // The game is against an AI
   online: false, // The game is multiplayer and online
   end: false, // Is the game has ended
   freeze: false, // Is the game was frozen to avoid any changes during animations etc.
@@ -234,10 +234,18 @@ export const mutations = {
   hideNextTurnBanner: state => state.showNextTurnBanner = false,
   endTheGame: state => state.end = true,
   resetState: (state) => {
-    // Avoid overwrite user emoji
-    const { userEmoji, ...newStates } = initialState();
+    // Avoid overwrite user emoji and name
+    const { userEmoji, userName, ...newStates } = initialState();
     Object.keys(newStates).forEach(key => state[key] = newStates[key]);
   },
   setEmoji: (state, emoji) => state.userEmoji = emoji,
   setUserName: (state, name) => state.userName = name,
+  playAgainstAI: state => state.againstAI = true,
+  playOnline: (state) => {
+    state.online = true;
+    state.multiplayer = true;
+  },
+  playWithSharedScreen: (state) => {
+    state.multiplayer = true;
+  },
 };

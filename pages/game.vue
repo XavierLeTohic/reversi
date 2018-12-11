@@ -10,7 +10,7 @@
           :level="2"
           :score="opponentScore"
           :color="color === 'w' ? 'black' : 'white'"
-          name="Matthias"
+          name="Player 2"
           emoji="🦁"
         />
       </div>
@@ -25,7 +25,7 @@
           :score="playerScore"
           :color="color === 'w' ? 'white' : 'black'"
           :emoji="userEmoji"
-          name="You"
+          :name="userName"
         />
       </div>
     </div>
@@ -57,6 +57,7 @@ export default {
       'board',
       'color',
       'againstAI',
+      'userName',
       'userEmoji',
       'currentPlayer',
       'showNextTurnBanner',

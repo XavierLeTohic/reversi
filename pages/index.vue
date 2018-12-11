@@ -44,9 +44,7 @@ export default {
   },
   methods: {
     newGame() {
-      // Reset the states to be sure that the game start correctly
-      this.$store.commit('resetState');
-      this.$router.push('/game');
+      this.$router.push('/mode');
     },
   },
 };

@@ -66,36 +66,35 @@ export default {
 
 
 <style lang="stylus" scoped>
+.container
+  height 100%
+  width 100%
+  max-width 600px
+  display flex
+  align-items center
+  justify-content space-around
+  flex-direction column
+  margin auto
+  color white
 
-  .container
-    height 100%
+  .header
+    display flex
+    justify-content space-between
+    align-items center
     width 100%
-    max-width 600px
+    padding 25px
+
+  h2
+    text-shadow 0px 2px 2px rgba(0, 0, 0, 0.4)
+
+  .emoji__list
     display flex
     align-items center
     justify-content space-around
-    flex-direction column
-    margin auto
-    color white
+    flex-direction row
+    flex-wrap wrap
+    overflow-y scroll
 
-    .header
-      display flex
-      justify-content space-between
-      align-items center
-      width 100%
-      padding 25px
-
-    h2
-      text-shadow 0px 2px 2px rgba(0, 0, 0, 0.4)
-
-    .emoji__list
-      display flex
-      align-items center
-      justify-content space-around
-      flex-direction row
-      flex-wrap wrap
-      overflow-y scroll
-
-      button
-        margin 20px
+    button
+      margin 20px
 </style>
