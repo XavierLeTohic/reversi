@@ -8,9 +8,10 @@ html, body
   padding 0
   box-sizing border-box
   font-family system-ui, sans-serif
+  user-select none
 
 body
-  background-image radial-gradient(circle, #59c76d, #4eb163, #3e8c51, #192f1f, #000)
+  background-image radial-gradient(circle,#59c76d,#4eaf63,#2f6b3e,#192f1f,#000)
 
 html,
 body,

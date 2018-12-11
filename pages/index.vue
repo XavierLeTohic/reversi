@@ -65,6 +65,7 @@ h1
     width 70px
     background-color rgba(0, 0, 0, 0.30)
     border-radius 50%
+    text-align center
 
   .user__name
     font-weight bold
