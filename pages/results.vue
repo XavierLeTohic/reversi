@@ -7,21 +7,15 @@
     <div class="stats">
       <div v-if="hasEquality" class="status__label">
         Equality
-        <div class="status__emoji">
-          🤝
-        </div>
+        <div class="status__emoji" v-html="twemoji.parse('🤝')" />
       </div>
       <div v-if="!hasEquality && didUserWin" class="status__label">
         You win
-        <div class="status__emoji">
-          👏
-        </div>
+        <div class="status__emoji" v-html="twemoji.parse('👏')" />
       </div>
       <div v-if="!hasEquality && !didUserWin" class="status__label">
         You loose
-        <div class="status__emoji">
-          😭
-        </div>
+        <div class="status__emoji" v-html="twemoji.parse('😭')" />
       </div>
 
       <div class="actions">
@@ -39,6 +33,7 @@
 <script>
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mapState, mapGetters } from 'vuex';
+import twemoji from 'twemoji';
 
 import Board from '../components/Board.vue';
 
@@ -47,6 +42,11 @@ export default {
   transition: 'fade',
   components: {
     Board,
+  },
+  data() {
+    return {
+      twemoji,
+    };
   },
   computed: {
     ...mapState([
@@ -89,7 +89,21 @@ export default {
 };
 </script>
 
+<style lang="stylus">
+.status__emoji img.emoji
+  height 34px
+  width auto
+</style>
+
+
 <style lang="stylus" scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 350ms;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
 .container
   display flex
   flex-direction column

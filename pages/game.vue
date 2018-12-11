@@ -24,8 +24,8 @@
           :level="3"
           :score="playerScore"
           :color="color === 'w' ? 'white' : 'black'"
-          name="Xavier"
-          emoji="🐶"
+          :emoji="userEmoji"
+          name="You"
         />
       </div>
     </div>
@@ -57,6 +57,7 @@ export default {
       'board',
       'color',
       'againstAI',
+      'userEmoji',
       'currentPlayer',
       'showNextTurnBanner',
     ]),
@@ -98,7 +99,7 @@ export default {
         const makeAIMove = setTimeout(() => {
           this.$store.dispatch('makeAIMove');
           clearTimeout(makeAIMove);
-        }, 2000);
+        }, 1000);
       }
     }, 1500);
   },

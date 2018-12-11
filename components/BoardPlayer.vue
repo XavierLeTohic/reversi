@@ -1,11 +1,11 @@
 <template>
   <div :class="{ player__container: true, top }">
     <div v-if="!isAi" class="player__description">
-      <div class="emoji">{{ emoji }}</div>
+      <div class="emoji" v-html="twemoji.parse(emoji)" />
       <div class="name">{{ name }}</div>
     </div>
     <div v-if="isAi" class="player__description">
-      <div class="emoji">🤖</div>
+      <div class="emoji" v-html="twemoji.parse('🤖')" />
       <div class="name">Robot</div>
     </div>
     <div class="tokens">
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import twemoji from 'twemoji';
+
 export default {
   name: 'BoardPlayer',
   props: {
@@ -47,8 +49,20 @@ export default {
       default: false,
     },
   },
+  data() {
+    return {
+      twemoji,
+    };
+  },
 };
 </script>
+
+<style lang="stylus">
+.emoji img.emoji
+  height 30px
+  width auto
+</style>
+
 
 <style lang="stylus" scoped>
 .player__container

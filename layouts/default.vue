@@ -11,7 +11,7 @@ html, body
   user-select none
 
 body
-  background-image radial-gradient(circle,#59c76d,#4eaf63,#2f6b3e,#192f1f,#000)
+  background-image radial-gradient(circle,#62e27a,#4eaf63,#2f6b3e,#192f1f,#000)
 
 html,
 body,

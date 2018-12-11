@@ -12,6 +12,7 @@ import isValidPosition from '../utils/isValidPosition';
 // import MiniMax from '../utils/MiniMax';
 
 const initialState = () => ({
+  userEmoji: '🦊', // Default user emoji
   multiplayer: false, // The game is multiplayer on the same screen
   againstAI: true, // The game is against an AI
   online: false, // The game is multiplayer and online
@@ -232,7 +233,9 @@ export const mutations = {
   hideNextTurnBanner: state => state.showNextTurnBanner = false,
   endTheGame: state => state.end = true,
   resetState: (state) => {
-    const newStates = initialState();
+    // Avoid overwrite user emoji
+    const { userEmoji, ...newStates } = initialState();
     Object.keys(newStates).forEach(key => state[key] = newStates[key]);
   },
+  setEmoji: (state, emoji) => state.userEmoji = emoji,
 };

@@ -27,6 +27,22 @@ button
     background-color rgba(0,0,0,0.7)
     color white
 
+  &.outline
+    background-color transparent
+    box-shadow none
+    margin 0
+    padding 0
+
   .button__emoji
     filter brightness(0) invert(1)
     text-shadow none
+
+
+*::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+*::-webkit-scrollbar-thumb {
+    background: transparent;
+}
