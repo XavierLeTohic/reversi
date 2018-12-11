@@ -1,4 +1,7 @@
 button
+  display flex
+  justify-content space-between
+  align-items center
   margin 10px 0
   padding 10px 30px
   border none
@@ -35,7 +38,11 @@ button
 
   .button__emoji
     filter brightness(0) invert(1)
-    text-shadow none
+    margin-right: 10px
+
+    img.emoji
+      height 20px
+      width auto
 
 
 *::-webkit-scrollbar {

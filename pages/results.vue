@@ -20,10 +20,10 @@
 
       <div class="actions">
         <button @click="newGame">
-          <span class="button__emoji">⚔️</span> New game
+          <span class="button__emoji" v-html="twemoji.parse('⚔️')" />New game
         </button>
         <button class="button__secondary" @click="backHome">
-          <span class="button__emoji">🔙</span> Home
+          <span class="button__emoji" v-html="twemoji.parse('🔙')" /> Home
         </button>
       </div>
     </div>

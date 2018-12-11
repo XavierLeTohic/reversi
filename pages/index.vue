@@ -14,7 +14,7 @@
     </div>
     <div class="actions">
       <button @click="newGame">
-        <span class="button__emoji">⚔️</span> New game
+        <span class="button__emoji" v-html="twemoji.parse('⚔️')" /> New game
       </button>
     </div>
     <div class="copyright">
