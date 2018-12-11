@@ -46,11 +46,12 @@ export default {
         this.playAgainstAI();
       } else if (mode === 'online') {
         this.playOnline();
+        return this.$router.push('/matching');
       } else if (mode === 'screen') {
         this.playWithSharedScreen();
       }
 
-      this.$router.push('/game');
+      return this.$router.push('/game');
     },
   },
 };
@@ -64,6 +65,13 @@ export default {
 
 
 <style lang="stylus" scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 350ms;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
 .container
   height 100%
   width 100%

@@ -15,8 +15,9 @@ const initialState = () => ({
   userName: 'Player 1',
   userEmoji: '', // Default user emoji
   multiplayer: false, // The game is multiplayer on the same screen
-  againstAI: false, // The game is against an AI
   online: false, // The game is multiplayer and online
+  lookingForPlayers: false, // Currently looking for available players online
+  againstAI: false, // The game is against an AI
   end: false, // Is the game has ended
   freeze: false, // Is the game was frozen to avoid any changes during animations etc.
   color: ['b', 'w'][Math.round(Math.random())], // Random selection of the color
@@ -244,6 +245,7 @@ export const mutations = {
   playOnline: (state) => {
     state.online = true;
     state.multiplayer = true;
+    state.lookingForPlayers = true;
   },
   playWithSharedScreen: (state) => {
     state.multiplayer = true;

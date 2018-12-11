@@ -57,6 +57,8 @@ export default {
       'board',
       'color',
       'againstAI',
+      'online',
+      'multiplayer',
       'userName',
       'userEmoji',
       'currentPlayer',
