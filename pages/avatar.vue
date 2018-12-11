@@ -18,6 +18,7 @@
 </template>
 
 <script>
+/* global FBInstant */
 import twemoji from 'twemoji';
 
 export default {
@@ -30,8 +31,15 @@ export default {
     };
   },
   methods: {
-    setEmoji(emoji) {
+    async setEmoji(emoji) {
       this.$store.commit('setEmoji', emoji);
+
+      try {
+        await FBInstant.player.setDataAsync({ emoji });
+      } catch (err) {
+        console.log(err);
+      }
+
       this.$router.push('/');
     },
   },

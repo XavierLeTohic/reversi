@@ -9,7 +9,7 @@
         v-html="twemoji.parse(userEmoji)"
       />
       <div class="user__name">
-        Xavier
+        {{ userName }}
       </div>
     </div>
     <div class="actions">
@@ -38,6 +38,7 @@ export default {
   },
   computed: {
     ...mapState([
+      'userName',
       'userEmoji',
     ]),
   },
