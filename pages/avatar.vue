@@ -57,6 +57,11 @@ export default {
     height 40px
     width auto
     filter brightness(0) invert(1)
+
+@media (max-width: 570px)
+  .header
+    img.emoji
+      height 25px
 </style>
 
 

@@ -5,7 +5,6 @@ export default ({ store }) => {
   FBInstant.initializeAsync().then(async () => FBInstant.startGameAsync().then(async () => {
     const id = await FBInstant.player.getID();
     const name = await FBInstant.player.getName();
-    console.log(id, name);
 
     let userEmoji = '🦊';
 
@@ -19,6 +18,8 @@ export default ({ store }) => {
     } catch (err) {
       console.log(err);
     }
+
+    console.log(id, name, userEmoji);
 
     store.commit('setUserName', name);
     store.commit('setEmoji', userEmoji);
