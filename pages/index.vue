@@ -6,7 +6,7 @@
         class="user__emoji"
         aria-label="Choose an emoji"
         @click="$router.push('/avatar')"
-        v-html="twemoji.parse(userEmoji)"
+        v-html="twemoji.parse(userEmoji, (icon, options) => `./twemoji/${icon}.png`)"
       />
       <div class="user__name">
         {{ userName }}
@@ -14,7 +14,7 @@
     </div>
     <div class="actions">
       <button @click="newGame">
-        <span class="button__emoji" v-html="twemoji.parse('⚔️')" /> New game
+        <span class="button__emoji" v-html="twemoji.parse('⚔️', (icon, options) => `./twemoji/${icon}.png`)" /> New game
       </button>
     </div>
     <div class="copyright">

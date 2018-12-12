@@ -1,7 +1,7 @@
 <template>
   <div class="container matching">
     <transition name="fade">
-      <div v-if="!error" class="loader" v-html="twemoji.parse('🌐')" />
+      <div v-if="!error" class="loader" v-html="twemoji.parse('🌐', (icon, options) => `./twemoji/${icon}.png`)" />
       <div v-if="error" class="loader">
         <p>{{ errorMessage }}</p>
       </div>
@@ -48,8 +48,8 @@ export default {
 
       console.log(canMatch);
 
-      await FBInstant
-        .matchPlayerAsync()
+      FBInstant
+        .matchPlayerAsync(null, true)
         .then(() => {
           console.log(FBInstant.context.getID());
         })

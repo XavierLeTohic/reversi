@@ -1,11 +1,11 @@
 <template>
   <div :class="{ player__container: true, top }">
     <div v-if="!isAi" class="player__description">
-      <div class="emoji" v-html="twemoji.parse(emoji)" />
+      <div class="emoji" v-html="twemoji.parse(emoji, (icon, options) => `./twemoji/${icon}.png`)" />
       <div class="name">{{ name }}</div>
     </div>
     <div v-if="isAi" class="player__description">
-      <div class="emoji" v-html="twemoji.parse('🤖')" />
+      <div class="emoji" v-html="twemoji.parse('🤖', (icon, options) => `./twemoji/${icon}.png`)" />
       <div class="name">Robot</div>
     </div>
     <div class="tokens">

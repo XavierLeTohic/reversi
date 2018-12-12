@@ -7,23 +7,23 @@
     <div class="stats">
       <div v-if="hasEquality" class="status__label">
         Equality
-        <div class="status__emoji" v-html="twemoji.parse('🤝')" />
+        <div class="status__emoji" v-html="twemoji.parse('🤝', (icon, options) => `./twemoji/${icon}.png`)" />
       </div>
       <div v-if="!hasEquality && didUserWin" class="status__label">
         You win
-        <div class="status__emoji" v-html="twemoji.parse('👏')" />
+        <div class="status__emoji" v-html="twemoji.parse('👏', (icon, options) => `./twemoji/${icon}.png`)" />
       </div>
       <div v-if="!hasEquality && !didUserWin" class="status__label">
         You loose
-        <div class="status__emoji" v-html="twemoji.parse('😭')" />
+        <div class="status__emoji" v-html="twemoji.parse('😭', (icon, options) => `./twemoji/${icon}.png`)" />
       </div>
 
       <div class="actions">
         <button @click="newGame">
-          <span class="button__emoji" v-html="twemoji.parse('⚔️')" />New game
+          <span class="button__emoji" v-html="twemoji.parse('⚔️', (icon, options) => `./twemoji/${icon}.png`)" />New game
         </button>
         <button class="button__secondary" @click="backHome">
-          <span class="button__emoji" v-html="twemoji.parse('🔙')" /> Home
+          <span class="button__emoji" v-html="twemoji.parse('🔙', (icon, options) => `./twemoji/${icon}.png`)" /> Home
         </button>
       </div>
     </div>

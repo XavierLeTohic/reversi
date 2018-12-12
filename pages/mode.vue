@@ -3,16 +3,16 @@
     <div class="wrapper">
       <h2>Select a mode:</h2>
       <button @click="setMode('ai')">
-        <span v-html="twemoji.parse('🤖')" /> Against a robot
+        <span v-html="twemoji.parse('🤖', (icon, options) => `./twemoji/${icon}.png`)" /> Against a robot
       </button>
       <button @click="setMode('friend')">
-        <span v-html="twemoji.parse('👥')" /> Play with a friend
+        <span v-html="twemoji.parse('👥', (icon, options) => `./twemoji/${icon}.png`)" /> Play with a friend
       </button>
       <button @click="setMode('online')">
-        <span v-html="twemoji.parse('🌍')" /> Multiplayer online
+        <span v-html="twemoji.parse('🌍', (icon, options) => `./twemoji/${icon}.png`)" /> Multiplayer online
       </button>
       <button @click="setMode('screen')">
-        <span v-html="twemoji.parse('📱')" /> Share the screen
+        <span v-html="twemoji.parse('📱', (icon, options) => `./twemoji/${icon}.png`)" /> Share the screen
       </button>
     </div>
   </div>

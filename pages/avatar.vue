@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="header">
-      <button class="outline" @click="$router.push('/')" v-html="twemoji.parse('🔙')" />
+      <button class="outline" @click="$router.push('/')" v-html="twemoji.parse('🔙', (icon, options) => `./twemoji/${icon}.png`)" />
       <h2>Select an emoji</h2>
       <span>&nbsp;</span>
     </div>
@@ -11,7 +11,7 @@
         :key="index"
         class="outline"
         @click="setEmoji(emoji)"
-        v-html="twemoji.parse(emoji)"
+        v-html="twemoji.parse(emoji, (icon, options) => `./twemoji/${icon}.png`)"
       />
     </div>
   </div>
