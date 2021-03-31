@@ -25,6 +25,9 @@ export default {
     skipWaiting: true,
     clientsClaim: true,
   },
+  static: {
+    prefix: false,
+  },
   manifest: {
     name: 'ReversiMoji',
     short_name: 'ReversiMoji',
