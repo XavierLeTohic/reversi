@@ -18,9 +18,6 @@ export default {
   css: [
     '~/assets/main.styl',
   ],
-  modules: [
-    '@nuxtjs/pwa',
-  ],
   workbox: {
     skipWaiting: true,
     clientsClaim: true,

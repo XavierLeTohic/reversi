@@ -28,7 +28,6 @@
     "stylus-loader": "^3.0.2"
   },
   "dependencies": {
-    "@nuxtjs/pwa": "^3.3.5",
     "twemoji": "^11.2.0",
     "vue": "^2.6.12"
   }
