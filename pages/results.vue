@@ -6,15 +6,15 @@
 
     <div class="stats">
       <div v-if="hasEquality" class="status__label">
-        Equality
+        Tie
         <div class="status__emoji" v-html="twemoji.parse('🤝', (icon, options) => `./twemoji/${icon}.png`)" />
       </div>
       <div v-if="!hasEquality && didUserWin" class="status__label">
-        You win
+        You won
         <div class="status__emoji" v-html="twemoji.parse('👏', (icon, options) => `./twemoji/${icon}.png`)" />
       </div>
       <div v-if="!hasEquality && !didUserWin" class="status__label">
-        You loose
+        You lost
         <div class="status__emoji" v-html="twemoji.parse('😭', (icon, options) => `./twemoji/${icon}.png`)" />
       </div>
 
