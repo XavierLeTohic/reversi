@@ -166,12 +166,13 @@ export default {
   border-radius 50%
   align-self center
   box-shadow 0px 2px 2px rgba(0, 0, 0, 0.4)
-
-  &.token__black
-    background-color #000000
+  background-color #ffffff
 
   &.token__white
     background-color #ffffff
+
+  &.token__black
+    background-color #000000
 
 /* Token transition */
 .fade-enter-active, .fade-leave-active
