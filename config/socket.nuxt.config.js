@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 export default {
-  mode: 'spa',
+  srr: false,
   head: {
     titleTemplate: 'Play now | ReversiMoji',
     meta: [

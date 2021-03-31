@@ -1,3 +1,5 @@
+import Vue from 'vue';
+import NewBoard from '../utils/NewBoard';
 /* eslint-disable
   import/prefer-default-export,
   import/no-extraneous-dependencies,
@@ -5,15 +7,13 @@
   no-param-reassign,
   no-return-assign
 */
-import Vue from 'vue';
-
-import NewBoard from '../utils/NewBoard';
 import isValidPosition from '../utils/isValidPosition';
+
 // import MiniMax from '../utils/MiniMax';
 
 const initialState = () => ({
   userName: 'Player 1',
-  userEmoji: '', // Default user emoji
+  userEmoji: '🐱', // Default user emoji
   multiplayer: false, // The game is multiplayer on the same screen
   online: false, // The game is multiplayer and online
   lookingForPlayers: false, // Currently looking for available players online

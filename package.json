@@ -26,12 +26,13 @@
     "eslint-loader": "^2.1.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-vue": "^4.7.1",
-    "nuxt": "^2.3.4",
+    "nuxt": "^2.15.3",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
   },
   "dependencies": {
     "@nuxtjs/pwa": "^2.6.0",
-    "twemoji": "^11.2.0"
+    "twemoji": "^11.2.0",
+    "vue": "^2.6.12"
   }
 }
