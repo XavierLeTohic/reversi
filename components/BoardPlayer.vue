@@ -111,6 +111,7 @@ export default {
   border-radius 50%
   margin 0 5px
   box-shadow 0px 2px 2px rgba(0, 0, 0, 0.4)
+  background-color #ffffff
 
   &.black
     background-color #000000
