@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "config/socket.nuxt.config.js",
+      "src": "package.json",
       "use": "@nuxtjs/vercel-builder",
       "config": {
         "serverFiles": ["package.json"]
