@@ -13,7 +13,7 @@
     { "src": "/_nuxt/.+", "headers": { "Cache-Control": "max-age=31557600" } },
     {
       "src": "/static/sw.js",
-      "dest": "/.nuxt/static/sw.js",
+      "dest": "_nuxt/static/sw.js",
       "headers": {
         "cache-control": "public, max-age=43200, immutable",
         "Service-Worker-Allowed": "/"
